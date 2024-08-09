@@ -1,0 +1,16 @@
+dhlapi.dhl_api_form:
+  path: '/dhlapi-search-form'
+  defaults:
+    _form: '\Drupal\dhlapi\Form\DhlApiForm'
+    _title: 'DHL Search Form'
+  requirements:
+    _access: 'TRUE'
+dhlapi.dhl_api_config_form:
+  path: '/admin/config/dhlapi/dhlapiconfig'
+  defaults:
+    _form: '\Drupal\dhlapi\Form\DhlApiConfigForm'
+    _title: 'DhlApiConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

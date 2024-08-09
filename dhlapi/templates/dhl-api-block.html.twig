@@ -1,0 +1,49 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+{% set classes = [
+    'clear-both',
+] %}
+
+{% if content %}
+<div{{ attributes.addClass(classes) }}>
+    {% for value in content %}
+
+        {% if value['openingHours']|length == 7 %}
+            <div>
+                <div>locationName: {{value['name']}}</div>
+                <div>address:
+                    <ul>
+                    {%  set address = value['place']['address'] %}
+                        <li>countryCode: {{address['countryCode']}}</li>
+                        <li>postalCode: {{address['postalCode']}}</li>
+                        <li>addressLocality: {{address['addressLocality']}}</li>
+                        <li>streetAddress: {{address['streetAddress']}}</li>
+                    </ul>
+                </div>
+
+                <div>openingHours:
+                    <ul>
+                    {% for openingHours in value['openingHours'] %}
+                        <li>
+                            {{ openingHours['dayOfWeek']|replace({"http://schema.org/": ""}) }}: '{{openingHours['opens']}} - {{openingHours['closes']}}'
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <hr />
+        {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+    {{ text }}
+{% endif %}
+

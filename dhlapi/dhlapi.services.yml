@@ -1,0 +1,5 @@
+services:
+  dhlapi_location_client:
+    class: Drupal\dhlapi\DhlApiClient
+    arguments:
+      - '@http_client_factory'

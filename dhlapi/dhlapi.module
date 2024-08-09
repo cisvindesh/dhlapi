@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Contains dhlapi.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function dhlapi_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the dhlapi module.
+    case 'help.page.dhlapi':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function dhlapi_testing() {
+  $url = 'https://api.dhl.com/location-finder/v1/find-by-address';
+
+  $response = \Drupal::httpClient()->get($url,
+  [
+    'headers' => [
+      'DHL-API-Key' => '0GAteVkYArCOZB2dz9eg7S6ipQfvuJL4',
+      //'Content-Type' => 'application/json'
+    ],
+    'query' => [
+      'countryCode' => 'GB',
+      'addressLocality' => 'London',
+      'postalCode' => 'E1 6BD',
+    ],
+    'verify' => false
+  ]);
+  /*$body = $response->getBody()->getContents();
+  $status = $response->getStatusCode();
+  dump($body);exit;*/
+  $data = json_decode($response->getBody(), TRUE);
+  return $data;
+}
+//-H 'DHL-API-Key:0GAteVkYArCOZB2dz9eg7S6ipQfvuJL4'
+
+/**
+ * Implements hook_theme().
+ */
+function dhlapi_theme() {
+  return [
+    'dhl_api_block' => [
+      'variables' => [
+        'content' => NULL,
+        'text' => NULL,
+      ],
+      //'render element' => 'children',
+    ],
+  ];
+}

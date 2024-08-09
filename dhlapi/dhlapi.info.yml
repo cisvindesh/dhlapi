@@ -1,0 +1,6 @@
+name: 'dhlapi'
+type: module
+description: 'DHL API for location finder'
+core_version_requirement: 8.x || 9.x || 10.x || 11.x
+package: 'Custom'
+configure: dhlapi.dhl_api_config_form, dhlapi.dhl_api_form

@@ -1,0 +1,5 @@
+dhlapi:
+  base_url: "https://api.dhl.com/"
+  endpoint: "location-finder/v1/find-by-address"
+  api_key: "0GAteVkYArCOZB2dz9eg7S6ipQfvugqp7ng1p"
+  api_secret: "oxW95OLVZ23kj23jh4hivld"
